@@ -18,7 +18,7 @@ export default function Header({setTime, currentTime, setCurrentTime}){
                     onPress={() => handlePress(index)}
                     style={[styles.itemStyle, currentTime !== index && {borderColor: 'transparent'}]}
                 >
-                    <Text>{item}</Text>
+                    <Text style={styles.text}>{item}</Text>
                 </TouchableOpacity>
             ))}
         </View>
@@ -30,10 +30,17 @@ const styles = StyleSheet.create({
       flexDirection: "row",
     },
     itemStyle:{
+        alignItems: "center",
+        borderRadius: 10,
+        borderColor: "white",
         borderWidth: 3,
         fontSize: 32,
         fontWeight: "bold",
+        marginVertical: 20,
         padding: 5,
         width: "33%"
+    },
+    text:{
+        fontWeight: "bold"
     }
 })

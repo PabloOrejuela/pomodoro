@@ -8,6 +8,7 @@ import {
     SafeAreaView 
 } from 'react-native'
 import Header from './src/components/Header'
+import Timer from './src/components/Timer'
 
 const colors = ["#F7DC6F", "#A2D9CE", "#D7BDE2"]
 
@@ -21,13 +22,13 @@ export default function App() {
     <SafeAreaView style={[styles.container, {backgroundColor: colors[currentTime]}]}>
       <View style={Platform.OS === "android" && styles.contenedor}>
         <Text style={styles.text}>Pomodoro</Text>
-        <Text style={styles.text}>{time}</Text>
         <StatusBar style="auto" />
         <Header 
           setTime={setTime} 
           currentTime={currentTime}
           setCurrentTime={setCurrentTime}
         />
+        <Timer time={time}></Timer>
       </View>
     </SafeAreaView>
   )
@@ -36,10 +37,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
   contenedor: {
-    paddingTop: 30
+    flex: 1,
+    paddingTop: 30,
+    paddingHorizontal: 15,
   },
   text:{
     fontSize: 32,
