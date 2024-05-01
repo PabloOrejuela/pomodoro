@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native"
 
 export default function Timer({time}){
-    const formattedTime = `${Math.floor(time /60)
+    const formattedTime = `${Math.floor(time / 60)
             .toString()
             .padStart(2, "0")
         }:${(time % 60)

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { 
     StyleSheet, 
     Text, 
@@ -20,14 +20,39 @@ export default function App() {
   const [currentTime, setCurrentTime] = useState("POMO" | "SHORT" | "BREAK")
   const [isActive, setIsActive] = useState(false)
 
+  useEffect(() => {
+    let interval = null
+
+    if (isActive) {
+      //Run timer
+      interval = setInterval(() => {
+        setTime(time - 1)
+      }, 1000)
+      
+    }else{
+      //Clear intervall
+      clearInterval(interval)
+    }
+
+    if (time === 0) {
+      setIsActive(false)
+      setIsWorking(prev => !prev)
+      setTime(isWorking ? 300 : 1500)
+    }
+    return () => clearInterval(interval)
+  }, [isActive, time])
+
   function handleStartStop(){
+    playSound()
     setIsActive(!isActive) 
   }
 
   async function playSound(){
     const {sound} = await Audio.Sound.createAsync(
-      require("./assets/mouse-click.mp3")
+      require("./assets/mouse-click-1.mp3")
     )
+
+    await sound.playAsync()
   }
 
   return (
